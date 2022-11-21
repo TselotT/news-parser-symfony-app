@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	NEWS Page
+{% endblock %}
+{% block body %}
+	<nav class="navbar navbar-expand-sm bg-dark shadow sticky-top">
+		<div class="container-fluid">
+			<a href="#" class="navbar-brand px-2 text-info border border-info ms-2 rounded-1">NEWS</a>
+
+			<div>
+				<ul class="navbar-nav me-3">
+					{% if app.user %}
+						<li class="nav-item">
+							<span class="nav-link text-light" id="nav-link">Logged in as
+								{{ app.user.email }}
+							</span>
+						</li>
+					{% endif %}
+					<li class="nav-item">
+						<a href="{{ app.user ? '/logout' : '/login' }}" class="nav-link text-light" id="nav-link">{{ app.user
+                         ? 'Logout' : 'Login'}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		{% for article in articles %}
+			<div class="row">
+				<div class="list-group col-sm-3"></div>
+				<div class="card col-sm-6 border border-white" id="main">
+					<img src="{{article.urlToImage}}" class="card-img-top mt-2" alt="..."/>
+					<div class="card-body">
+						<h5 class="card-title">{{ article.title }}</h5>
+						<p class="fst-italic" style="font-size: small; color: gray">
+							{{ article.author }}
+						</p>
+						<p class="card-text">
+							{{ article.description }}
+						</p>
+						<div class="d-flex justify-content-between">
+							<p class="fst-italic" style="font-size: small; color: gray">
+								Published •
+								{{ article.publishedAt }}
+							</p>
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="/news/delete/{{ article.id }}" onclick="return confirm('Are you sure you want to delete the post?');" class="btn btn-danger">Delete</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		<div
+			class="navigation pagination justify-content-end me-5 mt-5">
+			{# {{ knp_pagination_render(articles) }} #}
+			{{ knp_pagination_render(articles, null, {}, {
+                'rounded': true,
+                'color': 'red'
+            }) }}
+		</div>
+	</div>
+
+
+{% endblock %}
