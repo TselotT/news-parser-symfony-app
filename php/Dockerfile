@@ -23,6 +23,3 @@ RUN composer require symfony/maker-bundle --dev
 RUN composer require doctrine/annotations
 RUN composer require twig/twig
 
-
-
-

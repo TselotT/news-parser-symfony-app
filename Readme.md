@@ -37,6 +37,13 @@ As a moderator
 
     - password => qwertyuiop
 
+In order to use the app execute the commands below
+
+```
+docker-compose up -d
+docker exec php bash -c "php bin/console cron:start" (to start the cron job)
+```
+
 For the cronjob in order to change the schedule time you can update the existing cron job operation in mysql or create another job by running the command below
 
 ```
