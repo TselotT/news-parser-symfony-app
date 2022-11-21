@@ -1,6 +1,7 @@
 # **News Parser Symfony Application**
 
 ## Getting Started for the first time
+!!! THIS DESCRIPTION ASSUMES YOUR MYSQL USENAME IS ```root``` AND PASSWORD IS ```password``` !!!
 
 Run the command below to start docker-compose
 
